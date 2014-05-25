@@ -1,5 +1,5 @@
-# LOL.
+# Hi.
 
-Here would be some code for an Arduino-powered, WiFly RN-XV module vehicle (or "bot") with a node-webkit and nodejs fontend.
+Some code here is fo ze game version of ze bot, only canz move foard-lefz an backwards. 
 
-Nothing here yet, check out the `game` branch, contains code for some game project.
+Yo cans mod it 2 make it move normally with wasd by adding more keys, I will do it when I am bored. 

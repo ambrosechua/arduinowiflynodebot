@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Client</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        body {
+            background-color: rgb(237, 237, 237);
+            border-top: 1px solid rgb(105, 105, 105);
+            text-align: center;
+        }
+        .man {
+            text-align: left;
+            margin: 0 auto;
+            width: 520px;
+        }
+    </style>
+</head>
+<body>
+    <pre class="man">
+                      ____ _ _            _
+            Arduino  / ___| (_) ___ _ __ | |_
+              Bot   | |   | | |/ _ \ '_ \| __|
+                    | |___| | |  __/ | | | |_
+                     \____|_|_|\___|_| |_|\__|
+
+
+    Usage: press "G" to turn
+           press "H" to move backwards
+
+    Goal:
+        Knock down as many blocks using only two possible
+        directions: forward-left and backward.
+
+    Description:
+        The bot will start at the start point in a boundary.
+        Three blocks are in the area, with difficulty 1 to 3,
+        the third block being the hardest to be accessed by
+        the bot.
+
+    Rules:
+        * Time limit: 10 minutes
+        * Not allowed out of the box or you will have a
+          penalty of one less stamp!
+        * No physical contact with the bot :)
+
+    Tips:
+        * Do block 1 first.
+    </pre>
+
+    <script src="jquery-2.1.0.min.js"></script>
+    <script>
+
+        var gui = require('nw.gui');
+
+        gui.Window.get().showDevTools();
+
+        var net = require("net");
+        var socket = new net.Socket();
+
+        socket.setEncoding("utf8");
+
+        var keymap;
+
+        var soc = socket.connect(44, "169.254.1.1", function () {
+            soc.on("data", function (data) {
+                console.log(data);
+            });
+
+            console.log("yay");
+
+            $(document).ready(function () {
+                // $.ajax({
+                //     url: 'keymap.json',
+                //     async: true,
+                //     dataType: 'json',
+                //     success: function (response) {
+                //         keymap = response;
+                //         console.log(keymap);
+                        $(window).on("keydown", function (e) {
+                            if (e.which == 71) {
+                                soc.write("g");
+                            }
+                            else if (e.which == 72) {
+                                soc.write("h");
+                            }
+                        });
+                        $(window).on("keyup", function (e) {
+                            if (e.which == 71) {
+                                soc.write("n");
+                            }
+                            else if (e.which == 72) {
+                                soc.write("n");
+                            }
+                        });
+                //     }
+                // });
+            });
+
+
+        });
+
+
+    </script>
+</body>
+</html>
